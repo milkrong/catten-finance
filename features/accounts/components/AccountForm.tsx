@@ -66,12 +66,12 @@ export const AccountForm = ({
             </FormItem>
           )}
         />
-        <Button className="w-full mt-2" type="submit" disabled={disabled}>
+        <Button className="w-full mt-4" type="submit" disabled={disabled}>
           {id ? 'Save Changes' : 'Create Account'}
         </Button>
         {!!id && (
           <Button
-            className="mt-2 w-full"
+            className="mt-4 w-full"
             variant="outline"
             type="button"
             disabled={disabled}
