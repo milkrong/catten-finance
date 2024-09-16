@@ -1,0 +1,24 @@
+version: "3.8"
+
+services:
+  app:
+    image: oven/bun:latest
+    working_dir: /app
+    volumes:
+      - .:/app
+    ports:
+      - "8009:3000"
+    environment:
+      - NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY=${NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY}
+      - CLERK_SECRET_KEY=${CLERK_SECRET_KEY}
+      - CLERK_PUBLISHABLE_KEY=${CLERK_PUBLISHABLE_KEY}
+      - NEXT_PUBLIC_CLERK_SIGN_IN_URL=${NEXT_PUBLIC_CLERK_SIGN_IN_URL}
+      - NEXT_PUBLIC_CLERK_SIGN_UP_URL=${NEXT_PUBLIC_CLERK_SIGN_UP_URL}
+      - DRIZZLE_DATABASE_URL=${DRIZZLE_DATABASE_URL}
+      - NEXT_PUBLIC_API_URL=${NEXT_PUBLIC_API_URL}
+    command: >
+      sh -c "bun install && bun run build && bun run start"
+
+networks:
+  default:
+    name: finance-network
