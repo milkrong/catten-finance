@@ -94,7 +94,12 @@ export const ImportCard = ({ data, onCancel, onSubmit }: Props) => {
             <Button size="sm" className="w-full lg:w-auto" onClick={onCancel}>
               Cancel
             </Button>
-            <Button size="sm" className="w-full lg:w-auto" disabled={progress < requiredColumns.length}>
+            <Button
+              size="sm"
+              className="w-full lg:w-auto"
+              disabled={progress < requiredColumns.length}
+              onClick={handleContinue}
+            >
               Continue ({progress} / {requiredColumns.length})
             </Button>
           </div>

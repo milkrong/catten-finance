@@ -33,7 +33,7 @@ const app = new Hono()
         );
       }
       const defaultTo = new Date();
-      const defaultFrom = subDays(defaultTo, 30);
+      const defaultFrom = subDays(defaultTo, 100);
       const startDate = from ? parse(from, "yyyy-MM-dd", new Date()) : defaultFrom;
       const endDate = to ? parse(to, "yyyy-MM-dd", new Date()) : defaultTo;
       const data = await db
@@ -60,6 +60,7 @@ const app = new Hono()
           )
         )
         .orderBy(desc(transactions.date));
+
       return c.json({
         data,
       });

@@ -1,22 +1,23 @@
-import { useQuery } from '@tanstack/react-query';
+import { useQuery } from "@tanstack/react-query";
 
-import { client } from '@/lib/hono';
+import { client } from "@/lib/hono";
+import { convertAmountFromMillion } from "@/lib/utils";
 
 export const useGetTransaction = (id?: string) => {
   const query = useQuery({
     enabled: !!id,
-    queryKey: ['transactions', { id }],
+    queryKey: ["transactions", { id }],
     queryFn: async () => {
-      const response = await client.api.transactions[':id'].$get({
+      const response = await client.api.transactions[":id"].$get({
         param: {
           id,
         },
       });
       if (!response.ok) {
-        throw new Error('Failed to fetch transactions');
+        throw new Error("Failed to fetch transactions");
       }
       const { data } = await response.json();
-      return data;
+      return { ...data, amount: convertAmountFromMillion(data.amount) };
     },
   });
 
